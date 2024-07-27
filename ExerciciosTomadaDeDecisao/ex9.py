@@ -4,3 +4,21 @@ O programa deve calcular e apresentar a quantidade de números pares e
 informar o valor zero. Certifique-se de incluir validações para garantir que
 apenas números positivos sejam considerados na contagem e cálculos
 '''
+
+pares = 0
+impares = 0
+
+while True:
+    numero = int(input("Digite um número positivo ou 0 para encerrar: "))
+    if numero == 0:
+        break
+    if numero > 0:
+        if numero % 2 == 0:
+            pares += 1
+        else:
+            impares += 1
+    else:
+        print("Por favor, insira apenas números positivos.")
+
+print(f"Quantidade de números pares: {pares}")
+print(f"Quantidade de números ímpares: {impares}")
