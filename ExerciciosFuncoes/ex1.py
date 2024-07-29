@@ -9,8 +9,14 @@ def soma(numero1, numero2, numero3):
 
 print('Digite 3 números inteiros para a soma')
 numeros = []
-for i in range(3): 
-    numero = int(input(f'Digite o número {i + 1}: '))
-    numeros.append(numero)
+
+for i in range(3):
+    while True:
+        try:
+            numero = int(input(f'Digite o número {i + 1}: '))
+            numeros.append(numero)
+            break
+        except ValueError:
+            print("Erro: Por favor, insira um número inteiro válido.")
 
 soma(numeros[0], numeros[1], numeros[2])

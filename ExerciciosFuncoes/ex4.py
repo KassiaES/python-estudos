@@ -32,8 +32,11 @@ def exibir_conversao(reais):
     print(f"{calcular_conversao(reais, euro):.2f} Euros")
     print(f"{calcular_conversao(reais, libra_esterlina):.2f} Libras Esterlinas")
 
-reais = float(input("Digite quanto dinheiro você tem na carteira em reais: "))
-
-exibir_conversao(reais)
-
+try:
+    reais = float(input("Digite quanto dinheiro você tem na carteira em reais: "))
+    if reais < 0:
+        raise ValueError("O valor não pode ser negativo.")
+    exibir_conversao(reais)
+except ValueError as e:
+    print(f"Erro: {e}. Por favor, insira um valor numérico válido.")
 
