@@ -1,8 +1,18 @@
 from livro import Livro
+from usuario import Usuario
+from colorama import Fore, Style
 
 livros = []
 
-def biblioteca():
+def adicionar_usuario(usuarios):
+    nome = input("Nome do usuário: ")
+    telefone = input("Telefone do usuário: ")
+    nacionalidade = input("Nacionalidade do usuário: ")
+    usuario = Usuario(nome, telefone, nacionalidade)
+    usuarios.append(usuario)
+    print(f"Usuário '{Fore.BLUE}{nome}{Style.RESET_ALL}' adicionado com sucesso!")
+
+def biblioteca(usuarios):
     while True:
         print("\nMenu da Biblioteca:")
         print("1. Adicionar Livro")
@@ -10,11 +20,13 @@ def biblioteca():
         print("3. Emprestar Livro")
         print("4. Devolver Livro")
         print("5. Renovar Empréstimo")
+        print("6. Adicionar Usuário")
+        print("7. Ver Registros de Empréstimos")
         print("0. Sair")
         escolha = input("Escolha uma opção: ")
         
         if escolha == '0':
-            break
+            return True
         elif escolha == '1':
             titulo = input("Título do livro: ")
             editora = input("Editora do livro: ")
@@ -30,12 +42,17 @@ def biblioteca():
                 print(livro)
         elif escolha == '3':
             titulo = input("Título do livro a ser emprestado: ")
-            for livro in livros:
-                if livro.titulo.lower() == titulo.lower():
-                    livro.emprestar()
-                    break
+            usuario_nome = input("Nome do usuário que está emprestando o livro: ").lower()
+            usuario = next((u for u in usuarios if u.nome.lower() == usuario_nome), None)
+            if usuario:
+                for livro in livros:
+                    if livro.titulo.lower() == titulo.lower():
+                        livro.emprestar(usuario)
+                        break
+                else:
+                    print(f"Livro '{titulo}' não encontrado.")
             else:
-                print(f"Livro '{titulo}' não encontrado.")
+                print(f"Usuário '{usuario_nome}' não encontrado.")
         elif escolha == '4':
             titulo = input("Título do livro a ser devolvido: ")
             for livro in livros:
@@ -52,5 +69,13 @@ def biblioteca():
                     break
             else:
                 print(f"Livro '{titulo}' não encontrado.")
+        elif escolha == '6':
+            adicionar_usuario(usuarios)
+        elif escolha == '7':
+            for livro in livros:
+                print(f"Registros de empréstimos para '{Fore.BLUE}{livro.titulo}{Style.RESET_ALL}':")
+                for registro in livro.registros:
+                    print(registro)
         else:
             print("Opção inválida, tente novamente.")
+    return False

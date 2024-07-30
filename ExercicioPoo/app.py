@@ -3,7 +3,7 @@ Vamos criar um sistema orientado a objetos para representar um
 sistema de biblioteca seguindo os requisitos abaixo:
 1. Cada livro pode ter um ou mais autores.
 2. A biblioteca controla apenas o nome, o telefone e a nacionalidade
-de cada usuário.****
+de cada usuário.
 3. Cada livro tem um título, editora, uma lista de gêneros aos quais
 pertence e uma lista de exemplares disponíveis.
 4. Quando um exemplar é emprestado, ele é removido da lista de
@@ -16,9 +16,10 @@ devolução e estado do exemplar (por exemplo, emprestado ou
 devolvido)***
 '''
 
-from biblioteca import biblioteca
+from biblioteca import biblioteca, adicionar_usuario
+from usuario import Usuario
 
-usuarios = ["joao", "maria", "ana"]  # Adicione alguns usuários padrão
+usuarios = []
 
 def menu():
     while True:
@@ -26,14 +27,14 @@ def menu():
         if usuario == '0':
             print('Encerrando o sistema..')
             break
-        elif usuario not in usuarios:
+        elif usuario not in [user.nome.lower() for user in usuarios]:
             print('Usuário não encontrado. Deseja se cadastrar? (s/n)')
             resposta = input().lower()
             if resposta == 's':
-                usuarios.append(usuario)
-                print(f'Usuário {usuario} cadastrado com sucesso!')
+                adicionar_usuario(usuarios)
         else:
-            biblioteca()
+            if biblioteca(usuarios):
+                break
 
 if __name__ == "__main__":
     menu()
