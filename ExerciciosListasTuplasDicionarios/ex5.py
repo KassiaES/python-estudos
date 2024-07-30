@@ -9,7 +9,7 @@ for i in range(3):
         try:
             numero = int(input(f'Digite o elemento {i + 1}: '))
             elementos1.append(numero)
-            break  # Sai do loop se a entrada for válida
+            break
         except ValueError:
             print('Por favor, insira um número inteiro válido.')
 
