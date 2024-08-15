@@ -13,7 +13,9 @@ permitidas.
 6. A biblioteca mantém um registro de todos os empréstimos
 realizados, incluindo detalhes como data de empréstimo, data de
 devolução e estado do exemplar (por exemplo, emprestado ou
-devolvido)***
+devolvido)
+Para modelar o sistema, utilize obrigatoriamente os conceitos de classe,
+herança, propriedade, encapsulamento e classe abstrata.
 '''
 
 from biblioteca import biblioteca, adicionar_usuario
