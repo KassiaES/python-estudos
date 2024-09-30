@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'base',
     'bootstrap5',
     'cursos',
-    'restframework',
+    'rest_framework',
     'rest_api',
 ]
 
