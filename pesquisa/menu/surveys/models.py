@@ -14,3 +14,10 @@ class Option(models.Model):
 
     def __str__(self):
         return self.text
+
+class Vote(models.Model):
+    option = models.ForeignKey(Option, on_delete=models.CASCADE)
+    creat_at = models.DateField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.option.question.text + ' : ' + self.option.text
