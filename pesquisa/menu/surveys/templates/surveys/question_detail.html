@@ -1,20 +1,28 @@
-{{ question }}
+{% extends "surveys/base.html" %}
+{% load django_bootstrap5 %}
 
-<h1>{{ question.text }}</h1>
+{% block content %}
+    <h1>{{ question.text }}</h1>
 
-<h3>Selecione uma opção</h3>
+    <h3>Selecione uma opção</h3>
 
-<ul>
-   <form method="post" action="{% url 'question-vote' question.id %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Votar</button>
-   </form>
-</ul>
+    <div class="row mt-3">
+        <div class="col-md-6">            
+            <form method="post" action="{% url 'question-vote' question.id %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Votar</button>
+            </form>           
+        </div>
 
-<h1>Resultados</h1>
-<ul>
-    {% for option in question.option_set.all %}
-        <li>{{ option.text }}: {{option.vote_set.count}} votos</li>
-    {% endfor %}
-</ul>
+        <div class="col-md-6">
+            <h1>Resultados</h1>
+            <ul>
+                {% for option in question.option_set.all %}
+                    <li>{{ option.text }}: {{option.vote_set.count}} votos</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+</div>
+{% endblock %}
